@@ -1,0 +1,5 @@
+@ObjectModel.leadingEntity.name: 'ZI_FinancialStatementV_S'
+define service ZUI_FINANCIALSTATEMENTV {
+  expose ZI_FINANCIALSTATEMENTV_S as FinancialStatemeAll;
+  expose ZI_FINANCIALSTATEMENTV as FinancialStatementV;
+}

@@ -1,0 +1,74 @@
+managed with additional save implementation in class ZBP_I_FINANCIALSTATEMENTV_S unique;
+strict;
+with draft;
+define behavior for ZI_FinancialStatementV_S alias FinancialStatemeAll
+draft table ZTB_FI_FS_V_D_S
+with unmanaged save
+lock master total etag LastChangedAtMax
+authorization master( global )
+
+{
+  field ( readonly )
+   SingletonID;
+
+  field ( notrigger )
+   SingletonID,
+   HideTransport,
+   LastChangedAtMax;
+
+
+  update;
+  internal create;
+  internal delete;
+
+  draft action ( features : instance ) Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) SelectCustomizingTransptReq parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _FinancialStatementV { create ( features : instance ); with draft; }
+}
+
+define behavior for ZI_FinancialStatementV alias FinancialStatementV
+persistent table ZTB_FI_FS_VER_CF
+draft table ZTB_FI_FS_VER_D
+lock dependent by _FinancialStatemeAll
+authorization dependent by _FinancialStatemeAll
+
+{
+  field ( mandatory : create )
+   FsVerCf,
+   FsItem;
+
+  field ( readonly )
+   SingletonID;
+
+  field ( readonly : update )
+   FsVerCf,
+   FsItem;
+
+  field ( notrigger )
+   SingletonID;
+
+
+  update( features : global );
+  delete( features : global );
+
+  mapping for ZTB_FI_FS_VER_CF
+  {
+    FsVerCf = FS_VER_CF;
+    FsItem = FS_ITEM;
+    IsBold = IS_BOLD;
+    IsNega = IS_NEGA;
+    FsNote = FS_NOTE;
+    FsItemTxtVn = FS_ITEM_TXT_VN;
+    FsItemTxtEn = FS_ITEM_TXT_EN;
+    FsHrynode = FS_HRYNODE;
+  }
+
+  association _FinancialStatemeAll { with draft; }
+
+  validation ValidateTransportRequest on save ##NOT_ASSIGNED_TO_DETACT { create; update; delete; }
+}

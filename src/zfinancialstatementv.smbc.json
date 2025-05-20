@@ -1,0 +1,36 @@
+{
+  "formatVersion": "1",
+  "header": {
+    "description": "Maintain Financial Statement Version Configuratio",
+    "originalLanguage": "en",
+    "abapLanguageVersion": "cloudDevelopment"
+  },
+  "serviceConfiguration": {
+    "serviceBinding": "ZUI_FINANCIALSTATEMENTV_O4",
+    "serviceName": "ZUI_FINANCIALSTATEMENTV_O4",
+    "serviceVersion": "0001",
+    "rootEntitySet": "FinancialStatemeAll",
+    "name": "Financial Statement Version Configuratio",
+    "configurationGroup": "",
+    "skipRootEntity": true
+  },
+  "appConfiguration": {
+    "listReport": {},
+    "objectPages": [
+      {
+        "entitySet": "FinancialStatemeAll",
+        "variantManagement": "control"
+      }
+    ],
+    "tableSettings": [
+      {
+        "entitySet": "FinancialStatementV",
+        "tableType": "gridTable",
+        "selectionMode": "auto",
+        "rowCountMode": "auto",
+        "creationModeName": "inlineCreationRows",
+        "createAtEnd": true
+      }
+    ]
+  }
+}
