@@ -1,0 +1,2 @@
+# ZPK_FI_FS_VERSION_CONFIG
+Khai báo ZACCT
